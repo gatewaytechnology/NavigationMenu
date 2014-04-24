@@ -31,13 +31,13 @@
 //Menu substrate alpha value
 + (float)backgroundAlpha
 {
-    return 0.6;
+    return 0.9;
 }
 
 //Menu alpha value
 + (float)menuAlpha
 {
-    return 0.8;
+    return 1.0;
 }
 
 //Value of bounce
@@ -49,7 +49,7 @@
 //Arrow image near title
 + (UIImage *)arrowImage
 {
-    return [UIImage imageNamed:@"arrow_down.png"];
+    return [UIImage imageNamed:@"btnDownArrow"];
 }
 
 //Distance between Title and arrow image
@@ -61,12 +61,12 @@
 //Items color in menu
 + (UIColor *)itemsColor
 {
-    return [UIColor blackColor];
+    return [UIColor whiteColor];
 }
 
 + (UIColor *)mainColor
 {
-    return [UIColor blackColor];
+    return [UIColor whiteColor];
 }
 
 + (float)selectionSpeed
@@ -76,11 +76,11 @@
 
 + (UIColor *)itemTextColor
 {
-    return [UIColor whiteColor];
+    return [UIColor black75PercentColor];
 }
 
 + (UIColor *)selectionColor
 {
-    return [UIColor colorWithRed:45.0/255.0 green:105.0/255.0 blue:166.0/255.0 alpha:1.0];
+    return [UIColor colorWithRed:29.0/255.0 green:149.0/255.0 blue:166.0/233.0 alpha:1.0];
 }
 @end

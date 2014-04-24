@@ -45,7 +45,7 @@
         self.table.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         
         UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.table.bounds.size.height, [SIMenuConfiguration menuWidth], self.table.bounds.size.height)];
-        header.backgroundColor = [UIColor color:[SIMenuConfiguration itemsColor] withAlpha:[SIMenuConfiguration menuAlpha]];
+        header.backgroundColor = [UIColor colorWithWhite:1.0f alpha:[SIMenuConfiguration menuAlpha]];
         header.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         [self.table addSubview:header];
 
@@ -100,7 +100,7 @@
 
 - (void)addFooter
 {
-    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [SIMenuConfiguration menuWidth], self.table.bounds.size.height - (self.items.count * [SIMenuConfiguration itemCellHeight]))];
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [SIMenuConfiguration menuWidth], MAX(64.0f, (self.table.bounds.size.height - (self.items.count * [SIMenuConfiguration itemCellHeight]))))];
     self.table.tableFooterView = footer;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onBackgroundTap:)];

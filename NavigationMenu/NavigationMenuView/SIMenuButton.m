@@ -28,12 +28,13 @@
         self.title = [[UILabel alloc] initWithFrame:frame];
         self.title.textAlignment = NSTextAlignmentCenter;
         self.title.backgroundColor = [UIColor clearColor];
+        self.title.lineBreakMode = NSLineBreakByTruncatingTail;
         NSDictionary *currentStyle = [[UINavigationBar appearance] titleTextAttributes];
-        self.title.textColor = currentStyle[UITextAttributeTextColor];
-        self.title.font = currentStyle[UITextAttributeFont];
-        self.title.shadowColor = currentStyle[UITextAttributeTextShadowColor];
-        NSValue *shadowOffset = currentStyle[UITextAttributeTextShadowOffset];
-        self.title.shadowOffset = shadowOffset.CGSizeValue;
+        self.title.textColor = currentStyle[NSForegroundColorAttributeName];
+        self.title.font = currentStyle[NSFontAttributeName];
+        //self.title.shadowColor = currentStyle[UITextAttributeTextShadowColor];
+        //NSValue *shadowOffset = currentStyle[UITextAttributeTextShadowOffset];
+        //self.title.shadowOffset = shadowOffset.CGSizeValue;
         [self addSubview:self.title];
 
         self.arrow = [[UIImageView alloc] initWithImage:[SIMenuConfiguration arrowImage]];
@@ -49,7 +50,7 @@
 
 - (void)layoutSubviews
 {
-    [self.title sizeToFit];
+    //[self.title sizeToFit];
     self.title.center = CGPointMake(self.frame.size.width/2, (self.frame.size.height-2.0)/2);
     self.arrow.center = CGPointMake(CGRectGetMaxX(self.title.frame) + [SIMenuConfiguration arrowPadding], self.frame.size.height / 2);
 }

@@ -22,11 +22,12 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.contentView.backgroundColor = [UIColor color:[SIMenuConfiguration itemsColor] withAlpha:[SIMenuConfiguration menuAlpha]];
+        //self.contentView.backgroundColor = [UIColor color:[UIColor whiteColor] withAlpha:[SIMenuConfiguration menuAlpha]];
+        self.contentView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:[SIMenuConfiguration menuAlpha]];
         self.textLabel.textColor = [SIMenuConfiguration itemTextColor];
         self.textLabel.textAlignment = NSTextAlignmentCenter;
-        self.textLabel.shadowColor = [UIColor darkGrayColor];
-        self.textLabel.shadowOffset = CGSizeMake(0.0, -1.0);
+        //self.textLabel.shadowColor = [UIColor darkGrayColor];
+        //self.textLabel.shadowOffset = CGSizeMake(0.0, -1.0);
         
         self.selectionStyle = UITableViewCellEditingStyleNone;
         
