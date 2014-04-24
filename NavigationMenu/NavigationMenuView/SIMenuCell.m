@@ -12,6 +12,8 @@
 #import "SICellSelection.h"
 #import <QuartzCore/QuartzCore.h>
 
+#import "UIFont+Custom.h"
+
 @interface SIMenuCell ()
 @property (nonatomic, strong) SICellSelection *cellSelection;
 @end
@@ -26,6 +28,7 @@
         self.contentView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:[SIMenuConfiguration menuAlpha]];
         self.textLabel.textColor = [SIMenuConfiguration itemTextColor];
         self.textLabel.textAlignment = NSTextAlignmentCenter;
+        self.textLabel.font = [UIFont customFontWithName:@"ProximaNova-Regular" size:18.0f];
         //self.textLabel.shadowColor = [UIColor darkGrayColor];
         //self.textLabel.shadowOffset = CGSizeMake(0.0, -1.0);
         

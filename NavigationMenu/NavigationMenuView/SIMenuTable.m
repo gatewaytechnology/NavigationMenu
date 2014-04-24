@@ -13,6 +13,9 @@
 #import "UIColor+Extension.h"
 #import "SICellSelection.h"
 
+#import "UIColor-Expanded.h"
+#import "UIFont+Custom.h"
+
 @interface SIMenuTable () {
     CGRect endFrame;
     CGRect startFrame;
@@ -100,7 +103,19 @@
 
 - (void)addFooter
 {
-    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [SIMenuConfiguration menuWidth], MAX(64.0f, (self.table.bounds.size.height - (self.items.count * [SIMenuConfiguration itemCellHeight]))))];
+    __block double  tableHeight = 0.0f;
+    [self.items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+     {
+         if ([obj[@"Title"] length] > 0)
+         {
+             tableHeight += 34.0f;
+         }
+
+         tableHeight += ([SIMenuConfiguration itemCellHeight] * [obj[@"Items"] count]);
+     }];
+
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [SIMenuConfiguration menuWidth], MAX(64.0f, (self.table.bounds.size.height - tableHeight)))];
+    footer.backgroundColor  = [UIColor colorWithWhite:1.0 alpha:1.0];
     self.table.tableFooterView = footer;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onBackgroundTap:)];
@@ -126,9 +141,45 @@
 
 #pragma mark - Table view data source
 
+/*
+navMenu.items = @[
+                  @{
+                      @"Title" : @"GATEWAY CHURCH",
+                      @"Items" : @[ ]
+                      },
+                  @{
+                      @"Title" : @"CAMPUSES",
+                      @"Items" :
+                          @[
+                              @"FRISCO",
+                              @"NRH",
+                              @"SOUTHLAKE",
+                              @"GRAND PRAIRIE"
+                              ]
+                      },
+                  @{
+                      @"Title" : @"GROUPS",
+                      @"Items" :
+                          @[
+                              @"GATEWAY MEN",
+                              @"TUESDAY SMALL GROUP"
+                              ]
+                      },
+                  @{
+                      @"Title" : @"",
+                      @"Items" : @[ @{
+                                        @"Title" : @"MY POSTS",
+                                        @"Icon" : @"Jason"
+                                        },
+                                    ]
+                      },
+                  ];
+*/
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    NSInteger   totalSections = [self.items count];
+    return totalSections;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -136,9 +187,80 @@
     return [SIMenuConfiguration itemCellHeight];
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    NSDictionary*   sectionD    = self.items[section];
+
+    if ([sectionD[@"Items"] count] == 0)
+    {
+        return 34.0f;
+    }
+
+    if ([sectionD[@"Title"] length] == 0)
+    {
+        return 0.0f;
+    }
+
+    return 34.0f;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    NSDictionary*   sectionD    = self.items[section];
+    NSString*       sectionName = sectionD[@"Title"];
+
+    if ([sectionD[@"Items"] count] == 0)
+    {
+        UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 34)];
+
+        /* Create custom view to display section header... */
+        UILabel*    label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 28)];
+        label.font          = [UIFont customFontWithName:@"ProximaNova-Semibold" size:18.0f];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor     = [UIColor blackColor];
+
+        /* Section header is in 0th index... */
+        [label setText:sectionName];
+        [view addSubview:label];
+        [view setBackgroundColor:[UIColor colorWithWhite:1.0f alpha:1.0f]];
+
+        return view;
+    }
+    else if ([sectionD[@"Title"] length] == 0)
+    {
+        UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        return view;
+    }
+    else
+    {
+        UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 18)];
+
+        /* Create custom view to display section header... */
+        UILabel*    label = [[UILabel alloc] initWithFrame:CGRectMake(0, 12, tableView.frame.size.width, 18)];
+        label.font          = [UIFont customFontWithName:@"ProximaNova-Bold" size:13.0f];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor     = [UIColor colorWithHexString:@"359aef"];
+
+        /* Section header is in 0th index... */
+        [label setText:sectionName];
+        [view addSubview:label];
+        [view setBackgroundColor:[UIColor colorWithWhite:1.0f alpha:1.0f]];
+
+        UIView* lineView = [[UIView alloc] initWithFrame:CGRectMake(40,0, view.frame.size.width - 80, 1)];
+        lineView.backgroundColor    = [UIColor colorWithHexString:@"a1a5a3"];
+        lineView.alpha              = 0.8f;
+        [view addSubview:lineView];
+
+        return view;
+    }
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.items.count;
+    NSDictionary*   sectionD    = self.items[section];
+    NSArray*        itemsD      = sectionD[@"Items"];
+    NSInteger       itemsInSection  = [itemsD count];
+    return itemsInSection;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -151,9 +273,19 @@
     }
     
     cell.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    
-    cell.textLabel.text = [self.items objectAtIndex:indexPath.row];
-    
+
+    NSDictionary*   sectionD    = self.items[indexPath.section];
+    NSArray*        itemsD      = sectionD[@"Items"];
+    id              itemD       = itemsD[indexPath.row];
+    if ([itemD isKindOfClass:[NSDictionary class]])
+    {
+        cell.textLabel.text = itemD[@"Title"];
+    }
+    else
+    {
+        cell.textLabel.text = itemD;
+    }
+
     return cell;
 }
 

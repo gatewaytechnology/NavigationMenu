@@ -19,7 +19,7 @@
 //Menu item height
 + (float)itemCellHeight
 {
-    return 44.0f;
+    return 34.0f;
 }
 
 //Animation duration of menu appearence
@@ -37,7 +37,7 @@
 //Menu alpha value
 + (float)menuAlpha
 {
-    return 1.0;
+    return 0.8;
 }
 
 //Value of bounce
@@ -76,7 +76,7 @@
 
 + (UIColor *)itemTextColor
 {
-    return [UIColor black75PercentColor];
+    return [UIColor colorWithWhite:0.70 alpha:1.0];
 }
 
 + (UIColor *)selectionColor

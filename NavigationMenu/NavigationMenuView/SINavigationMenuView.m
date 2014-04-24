@@ -59,6 +59,13 @@
         self.table = [[SIMenuTable alloc] initWithFrame:frame items:self.items];
         self.table.menuDelegate = self;
     }
+
+    [UIView animateWithDuration:0.3f
+                     animations:^
+     {
+         self.menuButton.title.alpha   = 0.0f;
+     }];
+
     [self.menuContainer addSubview:self.table];
     [self rotateArrow:M_PI];
     [self.table show];
@@ -68,6 +75,12 @@
 {
     [self rotateArrow:0];
     [self.table hide];
+
+    [UIView animateWithDuration:0.3f
+                     animations:^
+     {
+         self.menuButton.title.alpha   = 1.0f;
+     }];
 }
 
 - (void)rotateArrow:(float)degrees
