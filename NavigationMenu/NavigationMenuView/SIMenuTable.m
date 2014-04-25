@@ -13,6 +13,8 @@
 #import "UIColor+Extension.h"
 #import "SICellSelection.h"
 
+#import "CDOLocation.h"
+
 #import "UIColor-Expanded.h"
 #import "UIFont+Custom.h"
 
@@ -198,7 +200,7 @@ navMenu.items = @[
 
     if ([sectionD[@"Title"] length] == 0)
     {
-        return 0.0f;
+        return 1.0f;
     }
 
     return 34.0f;
@@ -212,6 +214,7 @@ navMenu.items = @[
     if ([sectionD[@"Items"] count] == 0)
     {
         UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 34)];
+        [view setBackgroundColor:[UIColor colorWithWhite:1.0f alpha:1.0f]];
 
         /* Create custom view to display section header... */
         UILabel*    label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 28)];
@@ -222,18 +225,25 @@ navMenu.items = @[
         /* Section header is in 0th index... */
         [label setText:sectionName];
         [view addSubview:label];
-        [view setBackgroundColor:[UIColor colorWithWhite:1.0f alpha:1.0f]];
 
         return view;
     }
-    else if ([sectionD[@"Title"] length] == 0)
+    else if ([sectionName length] == 0)
     {
-        UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 1)];
+        [view setBackgroundColor:[UIColor colorWithWhite:1.0f alpha:1.0f]];
+
+        UIView* lineView = [[UIView alloc] initWithFrame:CGRectMake(40,0, view.frame.size.width - 80, 1)];
+        lineView.backgroundColor    = [UIColor colorWithHexString:@"a1a5a3"];
+        lineView.alpha              = 0.8f;
+        [view addSubview:lineView];
+
         return view;
     }
     else
     {
         UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 18)];
+        [view setBackgroundColor:[UIColor colorWithWhite:1.0f alpha:1.0f]];
 
         /* Create custom view to display section header... */
         UILabel*    label = [[UILabel alloc] initWithFrame:CGRectMake(0, 12, tableView.frame.size.width, 18)];
@@ -244,7 +254,6 @@ navMenu.items = @[
         /* Section header is in 0th index... */
         [label setText:sectionName];
         [view addSubview:label];
-        [view setBackgroundColor:[UIColor colorWithWhite:1.0f alpha:1.0f]];
 
         UIView* lineView = [[UIView alloc] initWithFrame:CGRectMake(40,0, view.frame.size.width - 80, 1)];
         lineView.backgroundColor    = [UIColor colorWithHexString:@"a1a5a3"];
@@ -280,6 +289,11 @@ navMenu.items = @[
     if ([itemD isKindOfClass:[NSDictionary class]])
     {
         cell.textLabel.text = itemD[@"Title"];
+    }
+    else if ([itemD isKindOfClass:[CDOLocation class]])
+    {
+        CDOLocation*    location = (CDOLocation*)itemD;
+        cell.textLabel.text = location.name;
     }
     else
     {
