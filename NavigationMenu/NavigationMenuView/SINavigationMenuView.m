@@ -92,11 +92,11 @@
 
 #pragma mark -
 #pragma mark Delegate methods
-- (void)didSelectItemAtIndex:(NSUInteger)index
+- (void)didSelectItemAtIndex:(NSIndexPath*)indexPath
 {
     self.menuButton.isActive = !self.menuButton.isActive;
     [self onHandleMenuTap:nil];
-    [self.delegate didSelectItemAtIndex:index];
+    [self.delegate didSelectItemAtIndex:indexPath];
 }
 
 - (void)didBackgroundTap

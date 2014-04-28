@@ -311,7 +311,7 @@ navMenu.items = @[
     
     SIMenuCell *cell = (SIMenuCell *)[tableView cellForRowAtIndexPath:indexPath];
     [cell setSelected:YES withCompletionBlock:^{
-        [self.menuDelegate didSelectItemAtIndex:indexPath.row];
+        [self.menuDelegate didSelectItemAtIndex:indexPath];
     }];
     
 }

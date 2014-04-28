@@ -11,7 +11,7 @@
 
 @protocol SINavigationMenuDelegate <NSObject>
 
-- (void)didSelectItemAtIndex:(NSUInteger)index;
+- (void)didSelectItemAtIndex:(NSIndexPath*)indexPath;
 
 @end
 

@@ -10,7 +10,7 @@
 
 @protocol SIMenuDelegate <NSObject>
 - (void)didBackgroundTap;
-- (void)didSelectItemAtIndex:(NSUInteger)index;
+- (void)didSelectItemAtIndex:(NSIndexPath*)indexPath;
 @end
 
 @interface SIMenuTable : UIView <UITableViewDataSource, UITableViewDelegate>
