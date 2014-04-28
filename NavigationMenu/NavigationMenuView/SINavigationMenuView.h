@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSArray *items;
 
 - (id)initWithFrame:(CGRect)frame title:(NSString *)title;
+- (void)setTitle:(NSString*)title;
 - (void)displayMenuInView:(UIView *)view;
 
 @end

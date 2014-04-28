@@ -32,6 +32,11 @@
     return self;
 }
 
+- (void)setTitle:(NSString*)title
+{
+    self.menuButton.title.text = title;
+}
+
 - (void)displayMenuInView:(UIView *)view
 {
     self.menuContainer = view;
