@@ -13,6 +13,9 @@
 #import "UIColor+Extension.h"
 #import "SICellSelection.h"
 
+#import "DNTheme.h"
+#import "DNLabel.h"
+
 #import "CDOLocation.h"
 
 #import "UIColor-Expanded.h"
@@ -143,41 +146,6 @@
 
 #pragma mark - Table view data source
 
-/*
-navMenu.items = @[
-                  @{
-                      @"Title" : @"GATEWAY CHURCH",
-                      @"Items" : @[ ]
-                      },
-                  @{
-                      @"Title" : @"CAMPUSES",
-                      @"Items" :
-                          @[
-                              @"FRISCO",
-                              @"NRH",
-                              @"SOUTHLAKE",
-                              @"GRAND PRAIRIE"
-                              ]
-                      },
-                  @{
-                      @"Title" : @"GROUPS",
-                      @"Items" :
-                          @[
-                              @"GATEWAY MEN",
-                              @"TUESDAY SMALL GROUP"
-                              ]
-                      },
-                  @{
-                      @"Title" : @"",
-                      @"Items" : @[ @{
-                                        @"Title" : @"MY POSTS",
-                                        @"Icon" : @"Jason"
-                                        },
-                                    ]
-                      },
-                  ];
-*/
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger   totalSections = [self.items count];
@@ -192,6 +160,11 @@ navMenu.items = @[
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     NSDictionary*   sectionD    = self.items[section];
+
+    if (section == 0)
+    {
+        return 0.0f;
+    }
 
     if ([sectionD[@"Items"] count] == 0)
     {
@@ -210,6 +183,12 @@ navMenu.items = @[
 {
     NSDictionary*   sectionD    = self.items[section];
     NSString*       sectionName = sectionD[@"Title"];
+
+    if (section == 0)
+    {
+        UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        return view;
+    }
 
     if ([sectionD[@"Items"] count] == 0)
     {
@@ -246,13 +225,11 @@ navMenu.items = @[
         [view setBackgroundColor:[UIColor colorWithWhite:1.0f alpha:1.0f]];
 
         /* Create custom view to display section header... */
-        UILabel*    label = [[UILabel alloc] initWithFrame:CGRectMake(0, 12, tableView.frame.size.width, 18)];
-        label.font          = [UIFont customFontWithName:@"ProximaNova-Bold" size:13.0f];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.textColor     = [UIColor colorWithHexString:@"359aef"];
+        DNLabel*    label = [[DNLabel alloc] initWithFrame:CGRectMake(0, 12, tableView.frame.size.width, 18)];
 
         /* Section header is in 0th index... */
         [label setText:sectionName];
+        [DNThemeManager customizeLabel:label withGroup:@"MV" andScreen:@"CategoryMenu" andItem:@"HeaderLabel"];
         [view addSubview:label];
 
         UIView* lineView = [[UIView alloc] initWithFrame:CGRectMake(40,0, view.frame.size.width - 80, 1)];
@@ -298,6 +275,12 @@ navMenu.items = @[
     else
     {
         cell.textLabel.text = itemD;
+    }
+
+    if (indexPath.section == 0)
+    {
+        cell.textLabel.font         = [UIFont customFontWithName:@"ProximaNova-Semibold" size:18.0f];
+        cell.textLabel.textColor    = [UIColor blackColor];
     }
 
     return cell;
