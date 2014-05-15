@@ -47,11 +47,17 @@
 - (void)onHandleMenuTap:(id)sender
 {
     if (self.menuButton.isActive) {
-        NSLog(@"On show");
-        [self onShowMenu];
+        [DNUtilities runOnMainThreadWithoutDeadlocking:^
+         {
+             NSLog(@"On show");
+             [self onShowMenu];
+         }];
     } else {
-        NSLog(@"On hide");
-        [self onHideMenu];
+        [DNUtilities runOnMainThreadWithoutDeadlocking:^
+         {
+             NSLog(@"On hide");
+             [self onHideMenu];
+         }];
     }
 }
 

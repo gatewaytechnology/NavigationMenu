@@ -265,16 +265,23 @@
     id              itemD       = itemsD[indexPath.row];
     if ([itemD isKindOfClass:[NSDictionary class]])
     {
+        DLog(LL_Debug, LD_General, @"title=%@", itemD[@"Title"]);
         cell.textLabel.text = itemD[@"Title"];
     }
     else if ([itemD isKindOfClass:[CDOLocation class]])
     {
         CDOLocation*    location = (CDOLocation*)itemD;
+        DLog(LL_Debug, LD_General, @"title=%@", location.name);
         cell.textLabel.text = location.name;
     }
     else
     {
+        DLog(LL_Debug, LD_General, @"title=%@", itemD);
         cell.textLabel.text = itemD;
+    }
+    if ([cell.textLabel.text length] == 0)
+    {
+        DLog(LL_Debug, LD_General, @"*** ZERO TITLE ***");
     }
 
     if (indexPath.section == 0)
