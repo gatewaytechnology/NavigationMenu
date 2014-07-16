@@ -22,6 +22,12 @@
     return 34.0f;
 }
 
+//Label width
++ (float)labelWidth
+{
+    return 230.0f;
+}
+
 //Animation duration of menu appearence
 + (float)animationDuration
 {
@@ -55,7 +61,7 @@
 //Distance between Title and arrow image
 + (float)arrowPadding
 {
-    return 13.0;
+    return 5.0;
 }
 
 //Items color in menu
@@ -76,11 +82,13 @@
 
 + (UIColor *)itemTextColor
 {
-    return [UIColor colorWithWhite:0.70 alpha:1.0];
+    return [UIColor colorWithWhite:0.43 alpha:1.0];
 }
 
 + (UIColor *)selectionColor
 {
-    return [UIColor colorWithRed:29.0/255.0 green:149.0/255.0 blue:166.0/233.0 alpha:1.0];
+    NSDictionary *currentStyle = [[UINavigationBar appearance] titleTextAttributes];
+    return currentStyle[NSForegroundColorAttributeName];
 }
+
 @end
