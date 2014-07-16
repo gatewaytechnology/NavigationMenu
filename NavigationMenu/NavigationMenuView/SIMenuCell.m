@@ -14,7 +14,7 @@
 #import "UIFont+Custom.h"
 
 @interface SIMenuCell ()
-//@property (nonatomic, strong) SICellSelection *cellSelection;
+
 @end
 
 @implementation SIMenuCell
@@ -53,7 +53,6 @@
     {
         self.textLabel.textColor = [SIMenuConfiguration itemTextColor];
     }
-    
 }
 
 @end

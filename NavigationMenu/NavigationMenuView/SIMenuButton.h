@@ -14,5 +14,4 @@
 @property (nonatomic, strong) UILabel *title;
 @property (nonatomic, strong) UIImageView *arrow;
 
-
 @end

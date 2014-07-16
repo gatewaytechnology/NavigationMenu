@@ -9,6 +9,7 @@
 #import "SIMenuConfiguration.h"
 
 @implementation SIMenuConfiguration
+
 //Menu width
 + (float)menuWidth
 {
@@ -73,11 +74,6 @@
 + (UIColor *)mainColor
 {
     return [UIColor whiteColor];
-}
-
-+ (float)selectionSpeed
-{
-    return 0.15;
 }
 
 + (UIColor *)itemTextColor
