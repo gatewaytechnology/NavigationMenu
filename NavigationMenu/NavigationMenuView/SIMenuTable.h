@@ -9,13 +9,20 @@
 #import <UIKit/UIKit.h>
 
 @protocol SIMenuDelegate <NSObject>
+
 - (void)didBackgroundTap;
-- (void)didSelectItemAtIndex:(NSUInteger)index;
+- (void)didSelectItemAtIndex:(NSIndexPath*)indexPath;
+- (void)animateTitleWithText:(NSString*)text CenterPoint:(CGPoint)point Showing:(BOOL)showing;
+- (void)didFinishShowing;
+- (void)didFinishHiding;
+
 @end
 
 @interface SIMenuTable : UIView <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) id <SIMenuDelegate> menuDelegate;
+
+@property (nonatomic, strong) NSIndexPath* currentIndexPath;
 
 - (id)initWithFrame:(CGRect)frame items:(NSArray *)items;
 - (void)show;

@@ -9,6 +9,7 @@
 #import "SIMenuConfiguration.h"
 
 @implementation SIMenuConfiguration
+
 //Menu width
 + (float)menuWidth
 {
@@ -19,7 +20,13 @@
 //Menu item height
 + (float)itemCellHeight
 {
-    return 44.0f;
+    return 34.0f;
+}
+
+//Label width
++ (float)labelWidth
+{
+    return 230.0f;
 }
 
 //Animation duration of menu appearence
@@ -31,7 +38,7 @@
 //Menu substrate alpha value
 + (float)backgroundAlpha
 {
-    return 0.6;
+    return 0.9;
 }
 
 //Menu alpha value
@@ -49,38 +56,35 @@
 //Arrow image near title
 + (UIImage *)arrowImage
 {
-    return [UIImage imageNamed:@"arrow_down.png"];
+    return [UIImage imageNamed:@"btnDownArrow"];
 }
 
 //Distance between Title and arrow image
 + (float)arrowPadding
 {
-    return 13.0;
+    return 5.0;
 }
 
 //Items color in menu
 + (UIColor *)itemsColor
 {
-    return [UIColor blackColor];
+    return [UIColor whiteColor];
 }
 
 + (UIColor *)mainColor
 {
-    return [UIColor blackColor];
-}
-
-+ (float)selectionSpeed
-{
-    return 0.15;
+    return [UIColor whiteColor];
 }
 
 + (UIColor *)itemTextColor
 {
-    return [UIColor whiteColor];
+    return [UIColor colorWithWhite:0.43 alpha:1.0];
 }
 
 + (UIColor *)selectionColor
 {
-    return [UIColor colorWithRed:45.0/255.0 green:105.0/255.0 blue:166.0/255.0 alpha:1.0];
+    NSDictionary *currentStyle = [[UINavigationBar appearance] titleTextAttributes];
+    return currentStyle[NSForegroundColorAttributeName];
 }
+
 @end

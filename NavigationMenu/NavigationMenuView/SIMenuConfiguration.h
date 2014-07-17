@@ -9,8 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @interface SIMenuConfiguration : NSObject
+
 //Menu width
 + (float)menuWidth;
+
+//Label width
++ (float)labelWidth;
 
 //Menu item height
 + (float)itemCellHeight;
@@ -39,12 +43,10 @@
 //Menu color
 + (UIColor *)mainColor;
 
-//Item selection animation speed
-+ (float)selectionSpeed;
-
 //Menu item text color
 + (UIColor *)itemTextColor;
 
 //Selection color
 + (UIColor *)selectionColor;
+
 @end

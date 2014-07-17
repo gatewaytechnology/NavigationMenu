@@ -11,7 +11,12 @@
 
 @protocol SINavigationMenuDelegate <NSObject>
 
-- (void)didSelectItemAtIndex:(NSUInteger)index;
+- (void)navigationMenuDidSelectItemAtIndex:(NSIndexPath*)indexPath;
+
+@optional
+
+- (void)navigationMenuWillOpenWithDuration:(NSTimeInterval)duration;
+- (void)navigationMenuWillCloseWithDuration:(NSTimeInterval)duration;
 
 @end
 
@@ -19,8 +24,10 @@
 
 @property (nonatomic, weak) id <SINavigationMenuDelegate> delegate;
 @property (nonatomic, strong) NSArray *items;
+@property (nonatomic, strong) NSIndexPath* initialIndexPath;
 
 - (id)initWithFrame:(CGRect)frame title:(NSString *)title;
+- (void)setTitle:(NSString*)title;
 - (void)displayMenuInView:(UIView *)view;
 
 @end
