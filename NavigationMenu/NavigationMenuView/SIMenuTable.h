@@ -11,7 +11,7 @@
 @protocol SIMenuDelegate <NSObject>
 
 - (void)didBackgroundTap;
-- (void)didSelectItemAtIndex:(NSIndexPath*)indexPath;
+- (void)didSelectItemAtIndex:(NSIndexPath*)indexPath withTitle:(NSString*)title;
 - (void)animateTitleWithText:(NSString*)text CenterPoint:(CGPoint)point Showing:(BOOL)showing;
 - (void)didFinishShowing;
 - (void)didFinishHiding;

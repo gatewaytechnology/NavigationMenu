@@ -26,7 +26,7 @@
         [self addSubview:self.title];
 
         self.arrow = [[UIImageView alloc] initWithImage:[SIMenuConfiguration arrowImage]];
-        self.arrow.frame = CGRectMake(self.frame.size.width / 2.0, self.frame.size.height - self.arrow.frame.size.height - 4.0, self.arrow.frame.size.width, self.arrow.frame.size.height);
+        self.arrow.center = CGPointMake(self.frame.size.width / 2.0, self.frame.size.height - self.arrow.frame.size.height - 3.0);
         
         [self addSubview:self.arrow];
     }

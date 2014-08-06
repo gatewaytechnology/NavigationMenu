@@ -100,17 +100,24 @@
 {
     SIMenuCell* selectedCell = (SIMenuCell*)[self.table cellForRowAtIndexPath:self.currentIndexPath];
     CGPoint convertedPoint = [self convertPoint:selectedCell.center fromView:selectedCell.superview];
+    
     [self.menuDelegate animateTitleWithText:selectedCell.textLabel.text CenterPoint:convertedPoint Showing:NO];
-    self.table.alpha = 0.0;
 
     [UIView animateWithDuration:[SIMenuConfiguration animationDuration] animations:^{
-        self.table.frame = startFrame;
+        self.table.alpha = 0.0;
     } completion:^(BOOL finished) {
-        [self.menuDelegate didFinishHiding];
-        [self removeFooter];
-        [self.table removeFromSuperview];
-        [self removeFromSuperview];
+        [UIView animateWithDuration:[SIMenuConfiguration animationDuration] animations:^{
+            self.table.frame = startFrame;
+        } completion:^(BOOL finished) {
+            [self.menuDelegate didFinishHiding];
+            [self removeFooter];
+            [self.table removeFromSuperview];
+            [self removeFromSuperview];
+        }];
     }];
+
+    
+
 }
 
 - (void)addFooter
@@ -305,7 +312,7 @@
     UITableViewCell* newCell = [tableView cellForRowAtIndexPath:indexPath];
     newCell.selected = YES;
     
-    [self.menuDelegate didSelectItemAtIndex:indexPath];
+    [self.menuDelegate didSelectItemAtIndex:indexPath withTitle:newCell.textLabel.text];
 }
 
 @end

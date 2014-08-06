@@ -50,13 +50,11 @@
     if (self.menuButton.isActive) {
         [DNUtilities runOnMainThreadWithoutDeadlocking:^
          {
-             NSLog(@"On show");
              [self onShowMenu];
          }];
     } else {
         [DNUtilities runOnMainThreadWithoutDeadlocking:^
          {
-             NSLog(@"On hide");
              [self onHideMenu];
          }];
     }
@@ -64,6 +62,8 @@
 
 - (void)onShowMenu
 {
+    self.userInteractionEnabled = NO;
+    
     if ([self.delegate respondsToSelector:@selector(navigationMenuWillOpenWithDuration:)])
     {
         [self.delegate navigationMenuWillOpenWithDuration:[SIMenuConfiguration animationDuration]];
@@ -77,7 +77,6 @@
         self.table.menuDelegate = self;
         self.table.currentIndexPath = self.initialIndexPath;
     }
-
     [self.menuContainer addSubview:self.table];
     [self rotateArrow:M_PI];
     [self.table show];
@@ -85,9 +84,10 @@
 
 - (void)onHideMenu
 {
-    if ([self.delegate respondsToSelector:@selector(navigationMenuWillCloseWithDuration:)])
+    self.userInteractionEnabled = NO;
+    if ([self.delegate respondsToSelector:@selector(navigationMenuWillCloseWithDuration:afterDelay:)])
     {
-        [self.delegate navigationMenuWillCloseWithDuration:[SIMenuConfiguration animationDuration]];
+        [self.delegate navigationMenuWillCloseWithDuration:[SIMenuConfiguration animationDuration] afterDelay:[SIMenuConfiguration animationDuration]];
     }
     
     [self rotateArrow:0];
@@ -102,11 +102,12 @@
 }
 
 #pragma mark - Delegate methods
-- (void)didSelectItemAtIndex:(NSIndexPath*)indexPath
+- (void)didSelectItemAtIndex:(NSIndexPath*)indexPath withTitle:(NSString *)title
 {
+    [self setTitle:title];
     self.menuButton.isActive = !self.menuButton.isActive;
-    [self onHandleMenuTap:nil];
     [self.delegate navigationMenuDidSelectItemAtIndex:indexPath];
+    [self onHandleMenuTap:nil];
 }
 
 - (void)didBackgroundTap
@@ -117,7 +118,7 @@
 
 - (void)animateTitleWithText:(NSString*)text CenterPoint:(CGPoint)point Showing:(BOOL)showing
 {
-    self.animationLabel = [[UILabel alloc] initWithFrame:self.menuButton.frame];
+    self.animationLabel = [[UILabel alloc] initWithFrame:self.menuButton.title.frame];
     self.animationLabel.font = self.menuButton.title.font;
     self.animationLabel.textColor = self.menuButton.title.textColor;
     self.animationLabel.textAlignment = self.menuButton.title.textAlignment;
@@ -139,8 +140,8 @@
         self.animationLabel.text = text;
         self.animationLabel.center = [self convertPoint:point fromView:self.table];
         
-        [UIView animateWithDuration:[SIMenuConfiguration animationDuration] animations:^{
-            self.animationLabel.center = self.menuButton.center;
+        [UIView animateWithDuration:[SIMenuConfiguration animationDuration] delay:[SIMenuConfiguration animationDuration] options:0 animations:^{
+            self.animationLabel.center = self.menuButton.title.center;
         } completion:^(BOOL finished) {
             self.menuButton.title.alpha   = 1.0f;
         }];
@@ -149,12 +150,14 @@
 
 - (void)didFinishShowing
 {
+    self.userInteractionEnabled = YES;
     [self.animationLabel removeFromSuperview];
     self.animationLabel = nil;
 }
 
 - (void)didFinishHiding
 {
+    self.userInteractionEnabled = YES;
     [self.animationLabel removeFromSuperview];
     self.animationLabel = nil;
 }
