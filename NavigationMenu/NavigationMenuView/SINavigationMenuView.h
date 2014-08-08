@@ -16,7 +16,7 @@
 @optional
 
 - (void)navigationMenuWillOpenWithDuration:(NSTimeInterval)duration;
-- (void)navigationMenuWillCloseWithDuration:(NSTimeInterval)duration;
+- (void)navigationMenuWillCloseWithDuration:(NSTimeInterval)duration afterDelay:(NSTimeInterval)delay;
 
 @end
 
