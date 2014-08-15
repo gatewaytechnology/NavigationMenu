@@ -39,6 +39,17 @@
     self.menuButton.title.text = [title uppercaseString];
 }
 
+- (void)setItems:(NSArray *)items
+{
+    if (![items isEqualToArray:_items])
+    {
+        _items = items;
+        
+        self.table.items = items;
+        [self.table reloadTable];
+    }
+}
+
 - (void)displayMenuInView:(UIView *)view
 {
     self.menuContainer = view;

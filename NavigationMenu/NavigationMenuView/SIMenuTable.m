@@ -28,7 +28,6 @@
 }
 
 @property (nonatomic, strong) UITableView* table;
-@property (nonatomic, strong) NSArray* items;
 @property (nonatomic, strong) CDOLocation* currentLocation;
 @property (nonatomic, strong) CDLocationModel* locationModel;
 
@@ -118,6 +117,11 @@
 
     
 
+}
+
+- (void)reloadTable
+{
+    [self.table reloadData];
 }
 
 - (void)addFooter
