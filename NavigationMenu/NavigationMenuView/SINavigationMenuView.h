@@ -25,6 +25,7 @@
 @property (nonatomic, weak) id <SINavigationMenuDelegate> delegate;
 @property (nonatomic, strong) NSArray *items;
 @property (nonatomic, strong) NSIndexPath* initialIndexPath;
+@property (nonatomic) BOOL justVisiting;
 
 - (id)initWithFrame:(CGRect)frame title:(NSString *)title;
 - (void)setTitle:(NSString*)title;

@@ -34,6 +34,23 @@
     return self;
 }
 
+- (void)setJustVisiting:(BOOL)justVisiting
+{
+    if (_justVisiting != justVisiting)
+    {
+        _justVisiting = justVisiting;
+
+        if (justVisiting)
+        {
+            self.menuButton.arrow.hidden = YES;
+        }
+        else
+        {
+            self.menuButton.arrow.hidden = NO;
+        }
+    }
+}
+
 - (void)setTitle:(NSString*)title
 {
     self.menuButton.title.text = [title uppercaseString];
