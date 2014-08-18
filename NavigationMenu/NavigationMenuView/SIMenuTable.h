@@ -24,8 +24,11 @@
 
 @property (nonatomic, strong) NSIndexPath* currentIndexPath;
 
+@property (nonatomic, strong) NSArray* items;
+
 - (id)initWithFrame:(CGRect)frame items:(NSArray *)items;
 - (void)show;
 - (void)hide;
+- (void)reloadTable;
 
 @end

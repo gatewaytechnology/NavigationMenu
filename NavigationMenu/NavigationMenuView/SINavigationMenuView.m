@@ -34,9 +34,37 @@
     return self;
 }
 
+- (void)setJustVisiting:(BOOL)justVisiting
+{
+    if (_justVisiting != justVisiting)
+    {
+        _justVisiting = justVisiting;
+
+        if (justVisiting)
+        {
+            self.menuButton.arrow.hidden = YES;
+        }
+        else
+        {
+            self.menuButton.arrow.hidden = NO;
+        }
+    }
+}
+
 - (void)setTitle:(NSString*)title
 {
     self.menuButton.title.text = [title uppercaseString];
+}
+
+- (void)setItems:(NSArray *)items
+{
+    if (![items isEqualToArray:_items])
+    {
+        _items = items;
+        
+        self.table.items = items;
+        [self.table reloadTable];
+    }
 }
 
 - (void)displayMenuInView:(UIView *)view
