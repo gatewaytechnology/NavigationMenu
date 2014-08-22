@@ -34,6 +34,13 @@
     return self;
 }
 
+- (void)setTitleColor:(UIColor *)titleColor
+{
+    _titleColor = titleColor;
+    
+    self.menuButton.title.textColor = titleColor;
+}
+
 - (void)setJustVisiting:(BOOL)justVisiting
 {
     if (_justVisiting != justVisiting)

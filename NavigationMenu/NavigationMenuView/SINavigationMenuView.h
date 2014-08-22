@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSArray *items;
 @property (nonatomic, strong) NSIndexPath* initialIndexPath;
 @property (nonatomic) BOOL justVisiting;
+@property (strong, nonatomic) UIColor* titleColor;
 
 - (id)initWithFrame:(CGRect)frame title:(NSString *)title;
 - (void)setTitle:(NSString*)title;
