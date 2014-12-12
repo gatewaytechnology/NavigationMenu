@@ -230,7 +230,7 @@
         UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 1)];
         [view setBackgroundColor:[UIColor colorWithWhite:1.0f alpha:1.0f]];
 
-        UIView* lineView = [[UIView alloc] initWithFrame:CGRectMake((self.frame.size.width - [SIMenuConfiguration labelWidth]) / 2.0, 0, [SIMenuConfiguration labelWidth], 1)];
+        UIView* lineView = [[UIView alloc] initWithFrame:CGRectMake((self.frame.size.width - self.labelWidth) / 2.0, 0, self.labelWidth, 1)];
         lineView.backgroundColor    = [UIColor colorWithHexString:@"a1a5a3"];
         lineView.alpha              = 0.8f;
         [view addSubview:lineView];
@@ -250,7 +250,7 @@
         [DNThemeManager customizeLabel:label withGroup:@"MV" andScreen:@"CategoryMenu" andItem:@"HeaderLabel"];
         [view addSubview:label];
 
-        UIView* lineView = [[UIView alloc] initWithFrame:CGRectMake((self.frame.size.width - [SIMenuConfiguration labelWidth]) / 2.0, 0, [SIMenuConfiguration labelWidth], 1)];
+        UIView* lineView = [[UIView alloc] initWithFrame:CGRectMake((self.frame.size.width - self.labelWidth) / 2.0, 0, self.labelWidth, 1)];
         lineView.backgroundColor    = [UIColor colorWithHexString:@"a1a5a3"];
         lineView.alpha              = 0.8f;
         [view addSubview:lineView];
@@ -272,11 +272,11 @@
     static NSString *cellIdentifier = @"Cell";
     
     SIMenuCell *cell = (SIMenuCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
     if (cell == nil) {
         cell = [[SIMenuCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
+    cell.labelWidth = self.labelWidth;
     cell.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 
     NSDictionary*   sectionD    = self.items[indexPath.section];

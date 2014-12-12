@@ -10,4 +10,6 @@
 
 @interface SIMenuCell : UITableViewCell
 
+@property (nonatomic) CGFloat labelWidth;
+
 @end
