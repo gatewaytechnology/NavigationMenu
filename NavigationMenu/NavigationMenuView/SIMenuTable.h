@@ -26,6 +26,8 @@
 
 @property (nonatomic, strong) NSArray* items;
 
+@property (nonatomic) CGFloat labelWidth;
+
 - (id)initWithFrame:(CGRect)frame items:(NSArray *)items;
 - (void)show;
 - (void)hide;

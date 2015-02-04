@@ -13,9 +13,6 @@
 //Menu width
 + (float)menuWidth;
 
-//Label width
-+ (float)labelWidth;
-
 //Menu item height
 + (float)itemCellHeight;
 

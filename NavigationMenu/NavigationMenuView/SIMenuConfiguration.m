@@ -23,12 +23,6 @@
     return 34.0f;
 }
 
-//Label width
-+ (float)labelWidth
-{
-    return 230.0f;
-}
-
 //Animation duration of menu appearence
 + (float)animationDuration
 {

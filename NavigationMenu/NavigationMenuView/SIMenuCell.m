@@ -38,7 +38,7 @@
 {
     [super layoutSubviews];
     
-    self.textLabel.frame = CGRectMake((self.frame.size.width - [SIMenuConfiguration labelWidth]) / 2.0, self.textLabel.frame.origin.y, [SIMenuConfiguration labelWidth], self.textLabel.frame.size.height);
+    self.textLabel.frame = CGRectMake((self.frame.size.width - self.labelWidth) / 2.0, self.textLabel.frame.origin.y, self.labelWidth, self.textLabel.frame.size.height);
 }
 
 - (void)setSelected:(BOOL)selected
