@@ -11,6 +11,8 @@
 #import "QuartzCore/QuartzCore.h"
 #import "SIMenuConfiguration.h"
 
+#import "InitialViewController.h"
+
 @interface SINavigationMenuView  ()
 
 @property (nonatomic, strong) UILabel* animationLabel;
@@ -107,9 +109,16 @@
     if (!self.table) {
         UIWindow *mainWindow = [[UIApplication sharedApplication] keyWindow];
         CGRect frame = mainWindow.frame;
+        
+        InitialViewController*   rvc = (InitialViewController*)[[DNUtilities appDelegate] rootViewController];
+        
+        CGFloat bottom =  rvc.isTabBarShown ? rvc.tabBarHeight : 0.0f;
+        
+        frame.size.height   -= bottom;
+        
         frame.origin.y += self.frame.size.height + [[UIApplication sharedApplication] statusBarFrame].size.height;
         self.table = [[SIMenuTable alloc] initWithFrame:frame items:self.items];
-        self.table.labelWidth = self.frame.size.width;
+        self.table.labelWidth = 300.0f; // self.frame.size.width;
         self.table.menuDelegate = self;
         self.table.currentIndexPath = self.initialIndexPath;
     }
@@ -138,10 +147,13 @@
 }
 
 #pragma mark - Delegate methods
-- (void)didSelectItemAtIndex:(NSIndexPath*)indexPath withTitle:(NSString *)title
+- (void)didSelectItemAtIndex:(NSIndexPath*)indexPath
+                   withTitle:(NSString*)title
 {
     [self setTitle:title];
+    
     self.menuButton.isActive = !self.menuButton.isActive;
+    
     [self.delegate navigationMenuDidSelectItemAtIndex:indexPath];
     [self onHandleMenuTap:nil];
 }

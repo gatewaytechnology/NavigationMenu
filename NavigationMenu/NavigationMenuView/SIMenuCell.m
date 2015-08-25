@@ -38,7 +38,18 @@
 {
     [super layoutSubviews];
     
-    self.textLabel.frame = CGRectMake((self.frame.size.width - self.labelWidth) / 2.0, self.textLabel.frame.origin.y, self.labelWidth, self.textLabel.frame.size.height);
+    double  textX       = (self.frame.size.width - self.labelWidth) / 2.0;
+    double  textY       = self.textLabel.frame.origin.y;
+    double  textWidth   = self.labelWidth;
+    double  textHeight  = self.textLabel.frame.size.height;
+    
+    self.textLabel.frame = CGRectMake(textX, textY, textWidth, textHeight);
+    
+    double  width   = self.textLabel.intrinsicContentSize.width;
+    double  x       = (self.frame.size.width - width) / 2.0;
+
+    self.imageView.frame = (CGRect){ x - self.frame.size.height - 4.0f, 0.0f, self.frame.size.height, self.frame.size.height };
+    self.imageView.contentMode  = UIViewContentModeScaleAspectFit;
 }
 
 - (void)setSelected:(BOOL)selected

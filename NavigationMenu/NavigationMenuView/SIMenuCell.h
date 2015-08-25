@@ -10,6 +10,8 @@
 
 @interface SIMenuCell : UITableViewCell
 
+@property (strong, nonatomic) id  item;
+
 @property (nonatomic) CGFloat labelWidth;
 
 @end

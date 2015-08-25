@@ -17,6 +17,8 @@
 
 #import "CDOLocation.h"
 #import "CDLocationModel.h"
+#import "CDOMember.h"
+#import "CDOPicture.h"
 
 #import "UIColor-Expanded.h"
 #import "UIFont+Custom.h"
@@ -272,7 +274,8 @@
     static NSString *cellIdentifier = @"Cell";
     
     SIMenuCell *cell = (SIMenuCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
+    if (cell == nil)
+    {
         cell = [[SIMenuCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
@@ -283,15 +286,34 @@
     NSArray*        itemsD      = sectionD[@"Items"];
     id              itemD       = itemsD[indexPath.row];
     
+    cell.item   = itemD;
+    
     if ([itemD isKindOfClass:[NSDictionary class]])
     {
-        DLog(LL_Debug, LD_General, @"title=%@", itemD[@"Title"]);
+        CDOMember*  member = (CDOMember*)(itemD[@"Member"]);
+        if (member)
+        {
+            DLog(LL_Debug, LD_General, @"name=%@", member.name);
+            [member.avatar largeImageWhenLoading:
+             ^()
+             {
+                 [cell.imageView setImage:nil];
+             }
+                                  withCompletion:
+             ^(CDOPicture* picture, UIImage* image, BOOL cached)
+             {
+                 [cell.imageView setImage:image];
+             }];
+        }
+        
+        DLog(LL_Debug, LD_General, @"title=%@", [itemD[@"Title"] uppercaseString]);
         cell.textLabel.text = [itemD[@"Title"] uppercaseString];
     }
     else if ([itemD isKindOfClass:[CDOLocation class]])
     {
         CDOLocation*    location = (CDOLocation*)itemD;
-        DLog(LL_Debug, LD_General, @"title=%@", location.name);
+        
+        DLog(LL_Debug, LD_General, @"title=%@", [location.name uppercaseString]);
         cell.textLabel.text = [location.name uppercaseString];
     }
     else
@@ -299,7 +321,6 @@
         DLog(LL_Debug, LD_General, @"title=%@", itemD);
         cell.textLabel.text = [itemD uppercaseString];
     }
-
 
     return cell;
 }
@@ -315,7 +336,7 @@
     
     UITableViewCell* newCell = [tableView cellForRowAtIndexPath:indexPath];
     newCell.selected = YES;
-    
+
     [self.menuDelegate didSelectItemAtIndex:indexPath withTitle:newCell.textLabel.text];
 }
 
