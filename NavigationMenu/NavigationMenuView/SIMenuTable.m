@@ -279,8 +279,9 @@
         cell = [[SIMenuCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
-    cell.labelWidth = self.labelWidth;
-    cell.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    cell.labelWidth         = self.labelWidth;
+    cell.autoresizingMask   = UIViewAutoresizingFlexibleWidth;
+    cell.imageView.image    = nil;
 
     NSDictionary*   sectionD    = self.items[indexPath.section];
     NSArray*        itemsD      = sectionD[@"Items"];
@@ -297,12 +298,14 @@
             [member.avatar largeImageWhenLoading:
              ^()
              {
-                 [cell.imageView setImage:nil];
+                 cell.imageView.image   = nil;
+                 [cell setNeedsLayout];
              }
                                   withCompletion:
              ^(CDOPicture* picture, UIImage* image, BOOL cached)
              {
-                 [cell.imageView setImage:image];
+                 cell.imageView.image   = image;
+                 [cell setNeedsLayout];
              }];
         }
         
