@@ -8,10 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class TBLAvatarImageView;
+
 @interface SIMenuCell : UITableViewCell
 
 @property (strong, nonatomic) id  item;
 
 @property (nonatomic) CGFloat labelWidth;
+
+/**
+ * The image view displaying the avatar of the author of the comment.
+ */
+@property (nonatomic, strong) IBOutlet TBLAvatarImageView* avatarImageView;
 
 @end

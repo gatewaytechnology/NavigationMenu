@@ -13,6 +13,8 @@
 
 #import "UIFont+Custom.h"
 
+#import "TBLAvatarImageView.h"
+
 @interface SIMenuCell ()
 
 @end
@@ -22,7 +24,8 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
+    if (self)
+    {
         self.contentView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:[SIMenuConfiguration menuAlpha]];
         self.textLabel.textColor = [SIMenuConfiguration itemTextColor];
         self.textLabel.textAlignment = NSTextAlignmentCenter;
@@ -30,7 +33,11 @@
         self.textLabel.font = currentStyle[NSFontAttributeName];
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        self.avatarImageView = [[TBLAvatarImageView alloc] initWithFrame:self.imageView.frame];
+        [self.contentView addSubview:self.avatarImageView];
     }
+    
     return self;
 }
 
@@ -46,7 +53,7 @@
     
     self.textLabel.frame = CGRectMake(textX, textY, textWidth, textHeight);
     
-    if (self.imageView.image)
+    if (self.avatarImageView.image)
     {
         textWidth   = self.textLabel.intrinsicContentSize.width;
         textX       = ((self.frame.size.width - textWidth) / 2.0) + (self.frame.size.height / 2.0) + 2.0f;
@@ -55,8 +62,8 @@
 
         double  imageX  = textX - self.frame.size.height - 4.0f;
         
-        self.imageView.frame = (CGRect){ imageX, 0.0f, self.frame.size.height, self.frame.size.height };
-        self.imageView.contentMode  = UIViewContentModeScaleAspectFit;
+        self.avatarImageView.frame = (CGRect){ imageX, 0.0f, self.frame.size.height, self.frame.size.height };
+        self.avatarImageView.contentMode  = UIViewContentModeScaleAspectFit;
     }
 }
 

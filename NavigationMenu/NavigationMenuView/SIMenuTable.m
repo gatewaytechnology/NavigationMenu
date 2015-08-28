@@ -22,6 +22,7 @@
 
 #import "UIColor-Expanded.h"
 #import "UIFont+Custom.h"
+#import "TBLAvatarImageView.h"
 
 @interface SIMenuTable ()
 {
@@ -279,9 +280,9 @@
         cell = [[SIMenuCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
-    cell.labelWidth         = self.labelWidth;
-    cell.autoresizingMask   = UIViewAutoresizingFlexibleWidth;
-    cell.imageView.image    = nil;
+    cell.labelWidth             = self.labelWidth;
+    cell.autoresizingMask       = UIViewAutoresizingFlexibleWidth;
+    cell.avatarImageView.member = nil;
 
     NSDictionary*   sectionD    = self.items[indexPath.section];
     NSArray*        itemsD      = sectionD[@"Items"];
@@ -292,22 +293,27 @@
     if ([itemD isKindOfClass:[NSDictionary class]])
     {
         CDOMember*  member = (CDOMember*)(itemD[@"Member"]);
+
+        cell.avatarImageView.member = member;
+
+        /*
         if (member)
         {
             DLog(LL_Debug, LD_General, @"name=%@", member.name);
             [member.avatar largeImageWhenLoading:
              ^()
              {
-                 cell.imageView.image   = nil;
+                 cell.avatarImageView.image   = nil;
                  [cell setNeedsLayout];
              }
                                   withCompletion:
              ^(CDOPicture* picture, UIImage* image, BOOL cached)
              {
-                 cell.imageView.image   = image;
+                 cell.avatarImageView.image   = image;
                  [cell setNeedsLayout];
              }];
         }
+         */
         
         DLog(LL_Debug, LD_General, @"title=%@", [itemD[@"Title"] uppercaseString]);
         cell.textLabel.text = [itemD[@"Title"] uppercaseString];
