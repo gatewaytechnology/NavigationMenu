@@ -62,7 +62,7 @@
 
         double  imageX  = textX - self.frame.size.height - 4.0f;
         
-        self.avatarImageView.frame = (CGRect){ imageX, 0.0f, self.frame.size.height, self.frame.size.height };
+        self.avatarImageView.frame = (CGRect){ imageX, 0.0f, self.frame.size.height - 4.0f, self.frame.size.height - 4.0f };
         self.avatarImageView.contentMode  = UIViewContentModeScaleAspectFit;
     }
 }
