@@ -21,6 +21,14 @@
 
 @implementation SIMenuCell
 
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    
+    self.avatarImageView.alpha  = 0.0f;
+    self.avatarImageView.member = nil;
+}
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

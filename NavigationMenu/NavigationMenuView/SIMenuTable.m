@@ -282,6 +282,7 @@
     
     cell.labelWidth             = self.labelWidth;
     cell.autoresizingMask       = UIViewAutoresizingFlexibleWidth;
+    cell.avatarImageView.alpha  = 0.0f;
     cell.avatarImageView.member = nil;
 
     NSDictionary*   sectionD    = self.items[indexPath.section];
@@ -290,30 +291,16 @@
     
     cell.item   = itemD;
     
+    
     if ([itemD isKindOfClass:[NSDictionary class]])
     {
         CDOMember*  member = (CDOMember*)(itemD[@"Member"]);
 
-        cell.avatarImageView.member = member;
-
-        /*
         if (member)
         {
-            DLog(LL_Debug, LD_General, @"name=%@", member.name);
-            [member.avatar largeImageWhenLoading:
-             ^()
-             {
-                 cell.avatarImageView.image   = nil;
-                 [cell setNeedsLayout];
-             }
-                                  withCompletion:
-             ^(CDOPicture* picture, UIImage* image, BOOL cached)
-             {
-                 cell.avatarImageView.image   = image;
-                 [cell setNeedsLayout];
-             }];
+            cell.avatarImageView.alpha  = 1.0f;
+            cell.avatarImageView.member = member;
         }
-         */
         
         DLog(LL_Debug, LD_General, @"title=%@", [itemD[@"Title"] uppercaseString]);
         cell.textLabel.text = [itemD[@"Title"] uppercaseString];
