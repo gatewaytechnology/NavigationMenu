@@ -82,6 +82,28 @@
 }
 
 #pragma mark - Actions
+- (void)showMenu
+{
+    if (self.menuButton.isActive)
+    {
+        return;
+    }
+    
+    self.menuButton.isActive = YES;
+    [self onHandleMenuTap:nil];
+}
+
+- (void)hideMenu
+{
+    if (!self.menuButton.isActive)
+    {
+        return;
+    }
+    
+    self.menuButton.isActive = NO;
+    [self onHandleMenuTap:nil];
+}
+
 - (void)onHandleMenuTap:(id)sender
 {
     if (self.menuButton.isActive) {

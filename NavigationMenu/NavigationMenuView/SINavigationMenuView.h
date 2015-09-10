@@ -32,4 +32,7 @@
 - (void)setTitle:(NSString*)title;
 - (void)displayMenuInView:(UIView *)view;
 
+- (void)showMenu;
+- (void)hideMenu;
+
 @end
