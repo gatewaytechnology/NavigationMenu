@@ -36,8 +36,13 @@
     return self;
 }
 
-- (void)setTitleColor:(UIColor *)titleColor
+- (void)setTitleColor:(UIColor*)titleColor
 {
+    if ([titleColor isEqual:_titleColor])
+    {
+        return;
+    }
+    
     _titleColor = titleColor;
     
     self.menuButton.title.textColor = titleColor;
@@ -67,13 +72,15 @@
 
 - (void)setItems:(NSArray *)items
 {
-    if (![items isEqualToArray:_items])
+    if ([items isEqualToArray:_items])
     {
-        _items = items;
-        
-        self.table.items = items;
-        [self.table reloadTable];
+        return;
     }
+    
+    _items = items;
+    
+    self.table.items = items;
+    [self.table reloadTable];
 }
 
 - (void)displayMenuInView:(UIView *)view
